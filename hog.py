@@ -1,24 +1,17 @@
 import cv2
 import numpy as np
 import os
-
-
 import pandas as pd
 
-import re
-import math
 import pickle as pkl
-import time
 from sklearn.svm import SVC
 from sklearn.metrics import roc_curve, auc
 from sklearn.model_selection import train_test_split 
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import ShuffleSplit
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-import random
 #function auxiliar to view images
 def showImgAndWait(titulo, img):
     cv2.imshow(titulo, img)
