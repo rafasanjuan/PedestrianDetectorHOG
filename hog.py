@@ -323,76 +323,60 @@ def pedestrian_detection(img,file_classifier, hor_jump=4,vert_jump=4):
                     cv2.rectangle(result_img,upper_left,down_right,(0,255,0),thickness=1)
     return result_img
 
-# Acc_test: (TP+TN)/(T+P)  0.94
-# migue@migue-X550VX:~/Documentos/vcpracticas/practicafinal$ python3 hog.py
-# hi
-# Accuracy 5-cross validation: 0.95 (+/- 0.01)
-# Accuracy 5-cross validation (test 0.3): 0.95 (+/- 0.00)
-
-
-## Maybe compute a different tipe of gradient? Sobel?
-## Gaussian blur sigma 0.3 y 0.5
-## Block and cell size
-## Normalization schemes.
-
-## SVM kernels
-## Number of bins?
-## Gamma normalization: 0.5 1.0 1.5
-## R-HOG vs C-HOG
 
 def main():
-    # print("GENERATING FEATURES")
-    # generateFeatures("Norm_L1",gamma=0.3,normalization_tipe=0)
-    # generateFeatures("Norm_L1_sqrt",gamma=0.3,normalization_tipe=1)
-    # generateFeatures("Norm_L2",gamma=0.3,normalization_tipe=2)
-    # generateFeatures("Norm_L2_hys",gamma=0.3,normalization_tipe=3)
+    print("GENERATING FEATURES")
+    generateFeatures("Norm_L1",gamma=0.3,normalization_tipe=0)
+    generateFeatures("Norm_L1_sqrt",gamma=0.3,normalization_tipe=1)
+    generateFeatures("Norm_L2",gamma=0.3,normalization_tipe=2)
+    generateFeatures("Norm_L2_hys",gamma=0.3,normalization_tipe=3)
 
-    # print("TRAINING LINEAR")
-    # training("svmL1-linear","Norm_L1","CurveROC-linear-L1","Norm L1 Linear",kernel='linear',cv=False)
-    # training("svmL1_sqrt-linear","Norm_L1_sqrt","CurveROC-linear-L1_sqrt","Norm L1_sqrt linear",kernel='linear',cv=False)
-    # training("svmL2-linear","Norm_L2","CurveROC-linear-L2","Norm L2 linear",kernel='linear',cv=False)
-    # training("svmL2_hys-linear","Norm_L2_hys","CurveROC-linear-L2_hys","Norm L2_hys linear",kernel='linear',cv=False)
+    print("TRAINING LINEAR")
+    training("svmL1-linear","Norm_L1","CurveROC-linear-L1","Norm L1 Linear",kernel='linear',cv=False)
+    training("svmL1_sqrt-linear","Norm_L1_sqrt","CurveROC-linear-L1_sqrt","Norm L1_sqrt linear",kernel='linear',cv=False)
+    training("svmL2-linear","Norm_L2","CurveROC-linear-L2","Norm L2 linear",kernel='linear',cv=False)
+    training("svmL2_hys-linear","Norm_L2_hys","CurveROC-linear-L2_hys","Norm L2_hys linear",kernel='linear',cv=False)
 
-    # print("TRAINING RBF")
-    # training("svmL1-rbf","Norm_L1","CurveROC-rbf-L1","Norm L1 rbf",kernel='rbf',cv=False)
-    # training("svmL1_sqrt-rbf","Norm_L1_sqrt","CurveROC-rbf-L1_sqrt","Norm L1_sqrt rbf",kernel='rbf',cv=False)
-    # training("svmL2-rbf","Norm_L2","CurveROC-rbf-L2","Norm L2 rbf",kernel='rbf',cv=False)
-    # training("svmL2_hys-rbf","Norm_L2_hys","CurveROC-rbf-L2_hys","Norm L2_hys rbf",kernel='rbf',cv=False)
+    print("TRAINING RBF")
+    training("svmL1-rbf","Norm_L1","CurveROC-rbf-L1","Norm L1 rbf",kernel='rbf',cv=False)
+    training("svmL1_sqrt-rbf","Norm_L1_sqrt","CurveROC-rbf-L1_sqrt","Norm L1_sqrt rbf",kernel='rbf',cv=False)
+    training("svmL2-rbf","Norm_L2","CurveROC-rbf-L2","Norm L2 rbf",kernel='rbf',cv=False)
+    training("svmL2_hys-rbf","Norm_L2_hys","CurveROC-rbf-L2_hys","Norm L2_hys rbf",kernel='rbf',cv=False)
 
 
     print("TRAINING RBF CV")
     training("svmL2-rbf","Norm_L2","CurveROC-rbf-L2","Norm L2 rbf",kernel='rbf',cv=True)
 
-    # img = cv2.imread("./test/prueba.png", 1)
-    # #img = cv2.pyrDown(img)
-    # res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
-    # cv2.imwrite("./result/result_prueba.png",res)
+    img = cv2.imread("./test/prueba.png", 1)
+    #img = cv2.pyrDown(img)
+    res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
+    cv2.imwrite("./result/result_prueba.png",res)
 
-    # img = cv2.imread("./test/prueba2.jpg", 1)
-    # img = cv2.pyrDown(img)
-    # res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
-    # cv2.imwrite("./result/result_prueba2.png",res)
+    img = cv2.imread("./test/prueba2.jpg", 1)
+    img = cv2.pyrDown(img)
+    res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
+    cv2.imwrite("./result/result_prueba2.png",res)
 
-    # img = cv2.imread("./test/prueba3.jpg", 1)
-    # #img = cv2.pyrDown(img)
-    # res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
-    # cv2.imwrite("./result/result_prueba3.png",res)
+    img = cv2.imread("./test/prueba3.jpg", 1)
+    #img = cv2.pyrDown(img)
+    res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
+    cv2.imwrite("./result/result_prueba3.png",res)
 
 
-    # img = cv2.imread("./test/granda.jpg", 1)
-    # #img = cv2.pyrDown(img)
-    # res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
-    # cv2.imwrite("./result/result_granada1.png",res)
+    img = cv2.imread("./test/granda.jpg", 1)
+    #img = cv2.pyrDown(img)
+    res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 8)
+    cv2.imwrite("./result/result_granada1.png",res)
 
-    # img = cv2.imread("./test/granda.jpg", 1)
-    # #img = cv2.pyrDown(img)
-    # res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 4)
-    # cv2.imwrite("./result/result_granada1.png",res)
+    img = cv2.imread("./test/granda.jpg", 1)
+    #img = cv2.pyrDown(img)
+    res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 4)
+    cv2.imwrite("./result/result_granada1.png",res)
 
-    # img = cv2.imread("./test/beatles.jpg", 1)
-    # img = cv2.pyrDown(img)
-    # res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 4)
-    # cv2.imwrite("./result/result_beatles.png",res)
+    img = cv2.imread("./test/beatles.jpg", 1)
+    img = cv2.pyrDown(img)
+    res = pedestrian_detection(img,"./data/models/svmL2-rbf.p",4, 4)
+    cv2.imwrite("./result/result_beatles.png",res)
 
     pass
 
@@ -401,7 +385,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-#migue@migue-X550VX:~/Documentos/vcpracticas/practicafinal$ python3 hog.py
 #lineal L1
 #Acc_test: (TP+TN)/(T+P)  0.95
 #lineal l1_sqrt
@@ -410,10 +393,6 @@ if __name__ == "__main__":
 #Acc_test: (TP+TN)/(T+P)  0.94
 #lineal L2_lys
 #Acc_test: (TP+TN)/(T+P)  0.93
-
-
-
-#Accuracy 5-cross validation: 0.95 (+/- 0.00)
 
 #rbf L1
 # Acc_test: (TP+TN)/(T+P)  0.94
@@ -424,6 +403,6 @@ if __name__ == "__main__":
 # rbf L2_hys
 # Acc_test: (TP+TN)/(T+P)  0.96
 
+#Accuracy 5-cross validation: 0.95 (+/- 0.00)
 
-
-#Acc_test: (TP+TN)/(T+P)  0.94 gasuuu
+#Acc_test: (TP+TN)/(T+P)  0.94 gauss mask
